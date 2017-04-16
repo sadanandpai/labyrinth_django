@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Level 2: Switch on{% endblock %}
+
+{% block content %}
+     <form method="POST" action="/answers/2/" accept-charset="UTF-8">
+        {% csrf_token %}
+        <div class="row center">
+            <div class="input-field col s2">
+                <input id="answer" name="answer" type="text" class="validate">
+                <label class="left" for="answer" data-error="invalid">Answer</label>
+            </div>
+            <div class="input-field col s1">
+                <input type="submit" class="waves-effect waves-light btn blue" value="Enter">
+            </div>
+        </div>
+    </form>
+            
+    <div class="row">
+        {% load static %}
+        <div class="col-lg-12 text-center">
+            <img src="{% static 'level2\dark.jpg' %}" alt="closecircuit" width="600" height="400">
+        </div>
+    </div>
+{% endblock %}
+
+<!--- hint -->
+<!--- Kill the darkness  -->

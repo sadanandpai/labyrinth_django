@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Level 1: Welcome{% endblock %}
+
+{% block content %}
+
+    <form method="POST" action="/answers/1/" accept-charset="UTF-8">
+        {% csrf_token %}
+        <div class="row center">
+            <div class="input-field col s2">
+                <input id="answer" name="answer" type="text" class="validate">
+                <label class="left" for="answer" data-error="invalid">Answer</label>
+            </div>
+            <div class="input-field col s1">
+                <input type="submit" class="waves-effect waves-light btn blue" value="Enter">
+            </div>
+        </div>
+    </form>
+
+
+	<div class="row">
+		<div class="col-m-12">
+            {% load static %}
+			<img src="{% static 'level1\1.jpg' %}" id="circle" width="600" height="480" usemap="#map"/><br>
+            <map name="map">
+                <area shape="circle" coords="300,240,55" href="disabled" alt="click">
+            </map>
+		</div>
+	</div>
+{% endblock %}    
+
+<!-- Hint -->
+<!-- You are just a click away -->

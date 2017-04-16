@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head> 
+	<title>Play</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        $(".button-collapse").sideNav({
+	          menuWidth: 250, // Default is 300
+	          edge: 'left', // Choose the horizontal origin
+	          closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	          draggable: false // Choose whether you can drag to open on touch screens
+	        });
+
+	        if($("#signup_errors").text().length > 41){
+	            $('#swiper-2').click();
+	        }
+	    });
+	</script>
+	<script src="files/js/signup_validations.js"></script>
+	<style>
+	  .container {
+	    margin: 0 auto;
+	    max-width: 1280px;
+	    width: 90%;
+	  }
+	  @media only screen and (min-width: 601px){.container{width:60%}}
+	  @media only screen and (min-width: 993px){.container{width:90%}}
+	</style>
+   </head> 
+   
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo">Labyrinth</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="about"><i class="material-icons left">info</i>About</a></li>
+                <li><a href="lb"><i class="material-icons left">list</i>Leaderboard</a></li>
+                <li>
+                    {% if request.user.is_authenticated %}
+                    <a href="/logout" title="Logout"><i class="material-icons left">settings_power</i>Logout</a>
+                    {% else %}
+                    <a href="/account"><i class="material-icons left">perm_identity</i>Account</a>
+                    {% endif %}
+                </li>
+             </ul>
+
+             <ul class="side-nav" id="mobile-demo">
+                 <li><a href="about"><i class="material-icons left">info</i>About</a></li>
+                <li><a href="lb"><i class="material-icons left">list</i>Leaderboard</a></li>
+                <li>
+                    {% if request.user.is_authenticated %}
+                    <a href="/logout" title="Logout"><i class="material-icons left">settings_power</i>Logout</a>
+                    {% else %}
+                    <a href="/account"><i class="material-icons left">perm_identity</i>Account</a>
+                    {% endif %}
+                </li>
+             </ul>
+        </div>
+    </nav>
+    
+        <ul id="swipe" class="tabs card center">
+            <li class="tab col s3"><a id="swiper-1" href="#swipe-1" class="black-text">Sign In</a></li>
+            <li class="tab col s3"><a id="swiper-2" href="#swipe-2" class="black-text">Sign Up</a></li>
+        </ul>
+        <br>
+
+        <div id="swipe-1" class="col s12">
+            <form class="col s12 m12" method="POST" action="/signin/" accept-charset="UTF-8">
+            	{% csrf_token %}
+                <div class="row center red-text small"></div>
+                <div class="row">
+                    <div class="input-field col s12 m4 offset-m4 offset-l4">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input id="icon_prefix" type="text" name="username" class="validate" required="yes" autocomplete="off" pattern="[A-z0-9_-]{6,15}" maxlength="15" title="Alphanumerics, -  and _ only with 6 to 15 characters">
+                      <label for="icon_prefix" data-error="Alphanumerics, -  and _ (6-15)">User Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m4 offset-m4 offset-l4">
+                      <i class="material-icons prefix">vpn_key</i>
+                      <input id="icon_prefix" type="password" name="password" class="validate" required="yes" pattern="[A-z0-9_-]{6,15}" maxlength="15" title="Alphanumerics, -  and _ only">
+                      <label for="icon_prefix" data-error="Alphanumerics, -  and _ (6-15)">Password</label>
+                    </div>
+                </div>
+                <p class="center">
+                  <input type="checkbox" class="filled-in" id="filled-in-box" name="remember" />
+                  <label for="filled-in-box">Remember me</label>
+                </p>
+                <div class="row">
+                    <div class="input-field col s12 center">
+                        <input type="submit" class="waves-effect waves-light btn blue" value="Sign in">
+                        Dont have an account? <a href="#" onclick="$('#swiper-2').click();">Register</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="swipe-2" class="col s12">
+            <form class="col s12 m12" method="POST" action="/signup/" accept-charset="UTF-8">
+                {% csrf_token %}
+                <div class="row center red-text small" id="signup_errors">
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input type="text" class="validate" name="signup_username" id="signup_username" autocomplete="off" required="yes" pattern="[A-z0-9_-]{6,15}" maxlength="15" title="Alphanumerics, -  and _ only">
+                      <label id="usname_lbl" for="icon_prefix" data-error="Alphanumerics, -  and _ (6-15)" data-success="">User Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+                      <i class="material-icons prefix">vpn_key</i>
+                      <input type="password" class="validate" name="signup_password" id="signup_password" required="yes" pattern="[A-z0-9_-]{6,15}" maxlength="15" title="Alphanumerics, -  and _ only">
+                      <label for="icon_prefix" data-error="Alphanumerics, -  and _ (6-15)">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+                      <i class="material-icons prefix">phone</i>
+                      <input id="icon_telephone" type="tel" class="validate" name="mobile" id="mobile" autocomplete="off" required="yes" pattern="[0-9]{10}" maxlength="10" title="Enter 10 digits mobile number">
+                      <label for="icon_telephone" data-error="10 digits mobile number">Mobile</label>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input type="email" class="validate" name="email" id="email" autocomplete="off" required="yes">
+                      <label id="email_lbl" for="icon_prefix" data-error="Valid email address">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 center">
+                         <input type="submit" class="waves-effect waves-light btn blue" value="Sign up">
+                        Already have an account? <a href="#" onclick="$('#swiper-1').click();">Sign in</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+</body>
+</html>

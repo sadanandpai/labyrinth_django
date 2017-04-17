@@ -97,13 +97,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         #'NAME': 'labyrinth',
-        'NAME': 'dbmfiie6n0kj1o',
+        'NAME': 'db13k8o8jdnqld',
         #'USER': 'postgres',
-        'USER': 'yxutcjquectozm',
+        'USER': 'ovcimkllyurkpa',
         #'PASSWORD': '123456',
-        'PASSWORD': 'f7bb0b21bd0d033e0ce46983e6c29932db75dd383cdc42684c252cd397a1f8ec',
+        'PASSWORD': 'c57d50cbb24ba721368313138c36cbfcfce20ce13c54d756a923b6c6c60da4e1',
         #'HOST': '127.0.0.1',
-        'HOST': 'ec2-50-19-95-47.compute-1.amazonaws.com',
+        'HOST': 'ec2-54-225-182-108.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

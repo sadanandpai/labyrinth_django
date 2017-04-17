@@ -150,8 +150,8 @@ STATIC_URL = '/static/'
 SOCIAL_AUTH_TWITTER_KEY = 'y37mMLBMKYeQSPGsswt5P5N7B'
 SOCIAL_AUTH_TWITTER_SECRET = 'uP7kYwcaX8kg64nHRfiTnYx9BrNYwM3qJyTuLH9PHh3ez1gIgk'
 
-LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
-LOGIN_URL = "http://127.0.0.1:8000/"
+#LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
+#LOGIN_URL = "http://127.0.0.1:8000/"
 
-#LOGIN_REDIRECT_URL = "https://labyrinthak.herokuapp.com/levels/"
-#LOGIN_URL = "https://labyrinthak.herokuapp.com/"
+LOGIN_REDIRECT_URL = "https://labyrinthak.herokuapp.com/levels/"
+LOGIN_URL = "https://labyrinthak.herokuapp.com/"

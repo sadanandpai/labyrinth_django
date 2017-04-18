@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.signing import Signer
-
+from django.db.models import Max
 from django.contrib.auth.models import User
 from riddles.models import UserDetails
 from riddles.models import Answers
@@ -14,7 +13,9 @@ from .forms import SignupForm
 from .forms import AnswerForm
 
 
-level_index = ['1', '2', '3', '4', '5']
+level_index = ['0.0', '1.1', '1.2', '1.3', '2.1', '3.1', '4.1', '5.1']
+level_url = ['welcome', 'who', 'answerhere', 'open', 'welcome', 'welcome', 'welcome']
+answer_url = ['1.1']
 
 def index(request):
 	return render(request, 'html/index.html')
@@ -31,6 +32,8 @@ def signin(request):
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
+				if int(user.userdetails.level) == 0:
+					setuserlevel(user.id, '1.1')
 				return redirect('levels')
 	else:
 		form = SigninForm()
@@ -38,7 +41,7 @@ def signin(request):
 
 
 def signup(request):
-	if request.user.is_authenticated is not None:
+	if request.user.is_authenticated:
 		return redirect('/')
 	elif request.method == 'POST':
 		form = SignupForm(request.POST)
@@ -50,10 +53,15 @@ def signup(request):
 			user = User.objects.create_user(username, email, password)
 			user.userdetails.mobile = mobile
 			user.save()
+			return render(request, 'html/account.html')
 	else:
 		form = SignupForm()
 	return render(request, 'html/account.html', {'form': form})
 
+
+def lb(request):
+	context = {'users': User.objects.order_by('-userdetails__level', 'userdetails__rank')}
+	return render(request, 'html/lb.html', 	context)
 
 def logout_user(request):
 	logout(request)
@@ -62,18 +70,41 @@ def logout_user(request):
 
 @login_required
 def levels(request):
-	return redirect('/levels/'+ str(request.user.userdetails.level))
+	if request.user.userdetails.level == 0:
+		setuserlevel(request.user.id, get_next_level('0.0'))
+		return redirect('/levels/')
+	return redirect('/levels/'+str(request.user.userdetails.level))
+
 
 @login_required
 def levels_quest(request, level_id):
-	if int(level_id) <= request.user.userdetails.level:
-		return render(request, 'html/levels/'+level_id+'.html')
-	else:
-		return render(request, 'html/404.html')
+	return redirect('/levels/'+level_id+'/'+level_url[level_index.index(level_id)])
+
+
+@login_required
+def levels_quest_url(request, level_id, userlevel_url):
+	if float(level_id) <= float(request.user.userdetails.level):
+		if level_url[level_index.index(level_id)] == userlevel_url:
+			return render(request, 'html/levels/'+level_id+'.html')
+		elif level_id in answer_url:
+			answer = Answers.objects.get(level=level_id)
+			if userlevel_url == answer.answer:
+				next_level = get_next_level(level_id)
+				if float(level_id) == float(request.user.userdetails.level):
+					setuserlevel(request.user.id, next_level)
+					return redirect("/levels/" + next_level)
+				else:
+					return redirect("/levels/" + next_level)
+			else:
+				return redirect("/levels/" + level_id)
+		else:
+			return render(request, 'html/404.html')
+	return render(request, 'html/404.html')
+
 
 @login_required
 def answers(request, level_id):
-	if int(level_id) <= request.user.userdetails.level:
+	if float(level_id) <= float(request.user.userdetails.level):
 		if request.method == 'POST':
 			form = AnswerForm(request.POST)
 			if form.is_valid():
@@ -81,10 +112,8 @@ def answers(request, level_id):
 				answer = Answers.objects.get(level=level_id)
 				if useranswer == answer.answer:
 					next_level = get_next_level(level_id)
-					if int(level_id) == request.user.userdetails.level:
-						tableuser = UserDetails.objects.get(user_id = request.user.id)
-						tableuser.level = next_level
-						tableuser.save()
+					if float(level_id) == float(request.user.userdetails.level):
+						setuserlevel(request.user.id, next_level)
 						return redirect("/levels/" + next_level)
 					else:
 						return redirect("/levels/" + next_level)
@@ -98,27 +127,18 @@ def answers(request, level_id):
 		return render(request, 'html/404.html')
 
 
-@login_required
-def answers_url(request, level_id, useranswer):
-	if int(level_id) <= request.user.userdetails.level:
-		if request.method == 'GET':
-			answer = Answers.objects.get(level=level_id)
-			if useranswer == answer.answer:
-				next_level = get_next_level(level_id)
-				if int(level_id) == request.user.userdetails.level:
-					tableuser = UserDetails.objects.get(user_id = request.user.id)
-					tableuser.level = get_next_level(level_id)
-					tableuser.save()
-					return redirect("/levels/" + next_level)
-				else:
-					return redirect("/levels/" + next_level)
-			else:
-				return redirect("/levels/" + level_id)
-		else:
-			return render(request, 'html/404.html')
-	else:
-		return render(request, 'html/404.html')
+def error404(request):
+	return render(request, 'html/404.html')
 
+def	setuserlevel(user_id, next_level):
+	tableuser = UserDetails.objects.get(user_id = user_id)
+	tableuser.level = next_level
+	max_rank = UserDetails.objects.filter(level=next_level).aggregate(Max('rank'))
+	if max_rank.get('rank__max') is not None:
+		tableuser.rank = max_rank.get('rank__max') + 1
+	else:
+		tableuser.rank = 1
+	tableuser.save()
 
 def get_next_level(level_id):
 	return level_index[level_index.index(level_id) + 1]

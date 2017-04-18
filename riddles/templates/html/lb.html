@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Level 1: Welcome{% endblock %}
+
+{% block content %}
+
+ <div class="row">
+    <div class="col s12 m10 offset-m1">                          
+      <table class="table text-center"> 
+        <thead>
+        <tr>
+          <th></th>
+          <th>Username</th>
+          <th>Level</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        {% for user in users %}
+        <tbody>
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.userdetails.level|floatformat:"0" }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

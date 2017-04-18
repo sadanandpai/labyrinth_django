@@ -7,8 +7,8 @@ from django.dispatch import receiver
 class UserDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile = models.CharField(max_length=12)
-    level = models.IntegerField(default=1)
-    sublevel = models.IntegerField(default=1)
+    level = models.DecimalField(default=0, max_digits=3, decimal_places=1)
+    rank = models.IntegerField(default=0)
 
 
 @receiver(post_save, sender=User)
@@ -23,6 +23,5 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Answers(models.Model):
-    level = models.IntegerField()
-    sublevel = models.IntegerField()
+    level = models.DecimalField(max_digits=3, decimal_places=1)
     answer = models.CharField(max_length=100)

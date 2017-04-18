@@ -59,6 +59,9 @@ def signup(request):
 	return render(request, 'html/account.html', {'form': form})
 
 
+def about(request):
+	return render(request, 'html/about.html')
+
 def lb(request):
 	context = {'users': User.objects.order_by('-userdetails__level', 'userdetails__rank')}
 	return render(request, 'html/lb.html', 	context)

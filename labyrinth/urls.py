@@ -20,9 +20,10 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^account$', views.signin),
+    url(r'^account/$', views.signin),
     url(r'^signin$', views.signin),
     url(r'^signup$', views.signup),
+    url(r'^about$', views.about),
     url(r'^lb$', views.lb),
     url(r'^logout$', views.logout_user),
 
@@ -34,5 +35,5 @@ urlpatterns = [
 
     url(r'^admin', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    url(r'^.*$', views.error404),
+    #url(r'^.*$', views.error404),
 ]

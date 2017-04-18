@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+      <div class="center">
+        <div class="card-panel blue lighten-3 z-depth-4">
+            <div class="col s12">
+              {% load static %}
+              <img src="{% static 'akshay.jpg' %}" alt="" class="circle" width="100px"> 
+          </div>
+          <div class="col s12">
+              <h3>Sadanand Akshay Pai</h3>
+              <span>Design and Development</span>
+          </div>
+        </div>
+
+        <div class="card-panel blue lighten-4 z-depth-4">
+            <div class="col s12">
+                <h4>Naveen Kumar</h4>
+                <span>Support</span>
+            </div>
+        </div>
+
+
+
+<a class="waves-effect waves-light btn center" href="#modal1">Website details</a>
+<div id="modal1" class="modal">
+  <div class="modal-content grey lighten-3">
+    <h4>Website details</h4>
+      
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><span class="">Front End</span></div>
+        <div class="collapsible-body blue lighten-4">
+          <div class="chip white">HTML5</div><div class="chip white">CSS</div><div class="chip white">Javascript</div><br>
+          <div class="chip white">Materilize</div><div class="chip white">BootStrap</div><div class="chip white">jQuery</div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Back End</div>
+        <div class="collapsible-body blue lighten-4">
+          <div class="chip white">PHP</div><div class="chip white">MYSQL</div><br>
+          <div class="chip white">LARAVEL 4.2</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

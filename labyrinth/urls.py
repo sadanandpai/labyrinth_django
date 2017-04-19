@@ -21,11 +21,11 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^account/$', views.signin),
-    url(r'^signin$', views.signin),
-    url(r'^signup$', views.signup),
-    url(r'^about$', views.about),
-    url(r'^lb$', views.lb),
-    url(r'^logout$', views.logout_user),
+    url(r'^signin/$', views.signin),
+    url(r'^signup/$', views.signup),
+    url(r'^about/$', views.about),
+    url(r'^lb/$', views.lb),
+    url(r'^logout/$', views.logout_user),
 
     url(r'^levels/$', views.levels, name='levels'),
     url(r'^levels/(?P<level_id>\d+\.\d{1})$', views.levels_quest),
@@ -33,7 +33,7 @@ urlpatterns = [
 
 	url(r'^answers/(?P<level_id>\d+\.\d{1})$', views.answers),
 
-    url(r'^admin', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     #url(r'^.*$', views.error404),
 ]

@@ -39,13 +39,13 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/about"><i class="material-icons left">info</i>About</a></li>
-                <li><a href="/lb"><i class="material-icons left">list</i>Leaderboard</a></li>
+                <li><a href="/about/"><i class="material-icons left">info</i>About</a></li>
+                <li><a href="/lb/"><i class="material-icons left">list</i>Leaderboard</a></li>
                 <li>
                     {% if request.user.is_authenticated %}
-                    <a href="/logout" title="Logout"><i class="material-icons left">settings_power</i>Logout</a>
+                    <a href="/logout/" title="Logout"><i class="material-icons left">settings_power</i>Logout</a>
                     {% else %}
-                    <a href="/account"><i class="material-icons left">perm_identity</i>Account</a>
+                    <a href="/account/"><i class="material-icons left">perm_identity</i>Account</a>
                     {% endif %}
                 </li>
             </ul>
@@ -67,7 +67,26 @@
         {% block menubar %}{% endblock %}
         <div class="container">
         	{% block content %}{% endblock %}
-        	{% block footer %}{% endblock %}
+
+            {% block answerfield %}
+                <div class="row">
+                <form method="POST" action="/answers/{% block levelno %}{% endblock %}/" accept-charset="UTF-8">
+                    {% csrf_token %}
+                        <div class="input-field col s8 m3 offset-m4">
+                            <input id="answer" name="answer" type="text" class="validate">
+                            <label class="left" for="answer" data-error="invalid">Answer</label>
+                        </div>
+                        <div class="input-field col s4 m1">
+                            <input type="submit" class="waves-effect waves-light btn blue" value="Enter">
+                        </div>
+                </form>
+                </div>
+            {% endblock %}
+
+            <div class="center-align">
+                {% block quest %}{% endblock %}
+            </div>
         </div>
+        {% block footer %}{% endblock %}
     </body>
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.core.cache import cache
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
@@ -29,8 +30,11 @@ def signin(request):
 		if form.is_valid():
 			username = request.POST['username']
 			password = request.POST['password']
+			remember = request.POST.get('remember', False)
 			user = authenticate(username=username, password=password)
 			if user is not None:
+				if remember == False:
+					request.session.set_expiry(0)
 				login(request, user)
 				if int(user.userdetails.level) == 0:
 					setuserlevel(user.id, '1.1')
@@ -67,6 +71,7 @@ def lb(request):
 	return render(request, 'html/lb.html', 	context)
 
 def logout_user(request):
+	cache.set('status_%s' % (request.user.username), 0, 0)
 	logout(request)
 	return redirect('/')
 

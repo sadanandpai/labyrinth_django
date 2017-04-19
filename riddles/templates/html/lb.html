@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Level 1: Welcome{% endblock %}
-
+{% block title %}Leaderboard{% endblock %}
+{% block answerfield %}{% endblock %}
 {% block content %}
 
  <div class="row">
@@ -20,6 +20,14 @@
           <td>{{ forloop.counter }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.userdetails.level|floatformat:"0" }}</td>
+
+          <td>{% if user.userdetails.online %}
+                Online
+              {% else %}
+                {{ user.userdetails.last_seen|timesince }}
+              {% endif %}
+              </td>
+
         </tr>
         </tbody>
         {% endfor %}

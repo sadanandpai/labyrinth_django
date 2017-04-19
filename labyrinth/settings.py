@@ -97,14 +97,14 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'labyrinth',
-        #'NAME': 'db13k8o8jdnqld',
-        'USER': 'postgres',
-        #'USER': 'ovcimkllyurkpa',
-        'PASSWORD': '123456',
-        #'PASSWORD': 'c57d50cbb24ba721368313138c36cbfcfce20ce13c54d756a923b6c6c60da4e1',
-        'HOST': '127.0.0.1',
-        #'HOST': 'ec2-54-225-182-108.compute-1.amazonaws.com',
+        #'NAME': 'labyrinth',
+        'NAME': 'db13k8o8jdnqld',
+        #'USER': 'postgres',
+        'USER': 'ovcimkllyurkpa',
+        #'PASSWORD': '123456',
+        'PASSWORD': 'c57d50cbb24ba721368313138c36cbfcfce20ce13c54d756a923b6c6c60da4e1',
+        #'HOST': '127.0.0.1',
+        'HOST': 'ec2-54-225-182-108.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -148,11 +148,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SOCIAL_AUTH_TWITTER_KEY = 'y37mMLBMKYeQSPGsswt5P5N7B'
 SOCIAL_AUTH_TWITTER_SECRET = 'uP7kYwcaX8kg64nHRfiTnYx9BrNYwM3qJyTuLH9PHh3ez1gIgk'
 
-LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
-LOGIN_URL = "http://127.0.0.1:8000/"
+#LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
+#LOGIN_URL = "http://127.0.0.1:8000/signin/"
 
-#LOGIN_REDIRECT_URL = "https://calm-harbor-96870.herokuapp.com/levels/"
-#LOGIN_URL = "https://calm-harbor-96870.herokuapp.com/"
+LOGIN_REDIRECT_URL = "https://calm-harbor-96870.herokuapp.com/levels/"
+LOGIN_URL = "https://calm-harbor-96870.herokuapp.com/signin/"
 
 
 # Setup caching per Django docs. In actuality, you'd probably use memcached instead of local memory.

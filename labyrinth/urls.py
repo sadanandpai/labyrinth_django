@@ -35,5 +35,5 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    #url(r'^.*$', views.error404),
+    url(r'^.*$', views.error404),
 ]

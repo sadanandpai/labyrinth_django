@@ -151,11 +151,11 @@ SOCIAL_AUTH_FACEBOOK_KEY = '451821651x33143'
 SOCIAL_AUTH_FACEBOOK_SECRET = '524fada3c3ca5adgb279da535da1d863'
 
 
-LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
-LOGIN_URL = "http://127.0.0.1:8000/signin/"
+#LOGIN_REDIRECT_URL = "http://127.0.0.1:8000/levels/"
+#LOGIN_URL = "http://127.0.0.1:8000/signin/"
 
-#LOGIN_REDIRECT_URL = "https://calm-harbor-96870.herokuapp.com/levels/"
-#LOGIN_URL = "https://calm-harbor-96870.herokuapp.com/signin/"
+LOGIN_REDIRECT_URL = "http://labyrinth2017.herokuapp.com//levels/"
+LOGIN_URL = "http://labyrinth2017.herokuapp.com/signin/"
 
 
 # Setup caching per Django docs. In actuality, you'd probably use memcached instead of local memory.

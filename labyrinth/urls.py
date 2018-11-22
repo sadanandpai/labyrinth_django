@@ -30,8 +30,7 @@ urlpatterns = [
     url(r'^levels/$', views.levels, name='levels'),
     url(r'^levels/(?P<level_id>\d+\.\d{1})$', views.levels_quest),
     url(r'^levels/(?P<level_id>\d+\.\d{1})/(?P<userlevel_url>[A-z0-9]+)$', views.levels_quest_url),
-
-	url(r'^answers/(?P<level_id>\d+\.\d{1})$', views.answers),
+    url(r'^answers/(?P<level_id>\d+\.\d{1})/$', views.answers),
 
     url(r'^admin/', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace='social')),

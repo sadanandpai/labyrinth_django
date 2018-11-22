@@ -1,27 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Level 1: Source is the destination{% endblock %}
-
+{% block levelno %}1.2{% endblock %}
 {% block quest %}
-
-    <form method="POST" action="/answers/1.1" accept-charset="UTF-8">
-        {% csrf_token %}
-            <div class="input-field col s8 m3 offset-m4">
-                <input id="answer" name="answer" type="text" class="validate">
-                <label class="left" for="answer" data-error="invalid">Answer</label>
-            </div>
-            <div class="input-field col s4 m1">
-                <input type="submit" class="waves-effect waves-light btn blue" value="Enter">
-            </div>
-    </form>
-
+    
     <div class="row">
         <div class="col-md-12 text-center">
             {% load static %}
-             <img src="{% static 'level1\noone.jpg' %}" alt="cortana" width="500" height="300"><br>
+            <img src="{% static 'level1\noone.jpg' %}" alt="cortana" width="500" height="300"><br>
         </div>
     </div>
-
-{% endblock %}  
+ 
 	
 <!-- clue -->
 <!-- Who killed Jessica?  -->
+
+
+{% endblock %}

@@ -13,10 +13,9 @@ from .forms import SigninForm
 from .forms import SignupForm
 from .forms import AnswerForm
 
-
-level_index = ['0.0', '1.1', '1.2', '1.3', '2.1', '3.1', '4.1', '5.1']
-level_url = ['welcome', 'who', 'answerhere', 'open', 'welcome', 'welcome', 'welcome']
-answer_url = ['1.1']
+level_index = ['0.0', '1.1', '1.2', '1.3', '2.1', '2.2', '3.1', '4.1', '4.2', '5.1', '6.1', '7.1', '8.1', '9.1', '9.2', '10.1', '11.1', '12.1', '13.1', '13.2', '13.3', '13.4', '14.1', '15.1', '16.1', '17.1', '18.1', '19.1', '20.1', '21.1', '22.1', '23.1']
+level_url = ['', 'welcome', 'who', 'answerhere', 'open', 'close', '1928', 'someoneLike', 'whatsapp', 'cryptic', 'notajackofall', 'tmbg', 'thecode', '60th', 'symbols', 'Brand', 'game', 'third', 'randomnumber', 'Sing', 'eodnhoj', 'limbo', 'jinchuriki', 'sa', 'poetry', 'eric', 'minority', 'mg', 'chel', 'ditsanddahs', 'TheFinalLevel', 'Congrats']
+answer_url = ['1.1', '1.3', '2.1', '13.4']
 
 def index(request):
 	return render(request, 'html/index.html')
@@ -43,7 +42,6 @@ def signin(request):
 		form = SigninForm()
 	return render(request, 'html/account.html', {'form': form})
 
-
 def signup(request):
 	if request.user.is_authenticated:
 		return redirect('/')
@@ -61,7 +59,6 @@ def signup(request):
 	else:
 		form = SignupForm()
 	return render(request, 'html/account.html', {'form': form})
-
 
 def about(request):
 	return render(request, 'html/about.html')
@@ -86,7 +83,7 @@ def levels(request):
 
 @login_required
 def levels_quest(request, level_id):
-	return redirect('/levels/'+level_id+'/'+level_url[level_index.index(level_id)])
+	return redirect('/levels/'+ level_id + '/' + level_url[level_index.index(level_id)])
 
 
 @login_required

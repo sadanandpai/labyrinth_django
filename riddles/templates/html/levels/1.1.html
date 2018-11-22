@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Level 1: Welcome{% endblock %}
-
 {% block levelno %}1.1{% endblock %}
 
+{% block answerfield %}{% endblock %}
+
 {% block quest %}
+	<br>
 	<div class="row">
 		<div class="col-m-12">
             {% load static %}
@@ -13,7 +15,8 @@
             </map>
 		</div>
 	</div>
-{% endblock %}    
 
-<!-- Hint -->
+	<!-- Hint -->
 <!-- You are just a click away -->
+
+{% endblock %}    

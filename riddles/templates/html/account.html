@@ -38,7 +38,9 @@
                   Dont have an account? <a href="#" onclick="$('#swiper-2').click();">Register</a>
               </div>
           </div>
-      </form>
+      </
+        
+        >
   </div>
 
   <div id="swipe-2" class="col s12">
@@ -46,6 +48,7 @@
           {% csrf_token %}
           <div class="row center red-text small" id="signup_errors">
           </div>
+          <label>{% serverError %}</label>
           <div class="row">
               <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
                 <i class="material-icons prefix">account_circle</i>

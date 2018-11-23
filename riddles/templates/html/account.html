@@ -45,6 +45,7 @@
       <form class="col s12 m12" method="POST" action="/signup/" accept-charset="UTF-8">
           {% csrf_token %}
           <div class="row center red-text small" id="signup_errors">
+            {{ serverError }}
           </div>
           <div class="row">
               <div class="input-field col s12 m6 l4 offset-m3 offset-l4">

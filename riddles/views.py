@@ -58,7 +58,7 @@ def signup(request):
 				user.save()
 				return render(request, 'html/account.html')
 			except Exception as e:
-				return render(request, 'html/account.html', {'serverError': 'username already in use')
+				return render(request, 'html/account.html', {'serverError': 'username already in use'})
 	else:
 		form = SignupForm()
 	return render(request, 'html/account.html', {'form': form})

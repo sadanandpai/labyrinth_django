@@ -48,14 +48,17 @@ def signup(request):
 	elif request.method == 'POST':
 		form = SignupForm(request.POST)
 		if form.is_valid():
-			username = form.cleaned_data['signup_username']
-			password = form.cleaned_data['signup_password']
-			mobile = form.cleaned_data['mobile']
-			email = form.cleaned_data['email']
-			user = User.objects.create_user(username, email, password)
-			user.userdetails.mobile = mobile
-			user.save()
-			return render(request, 'html/account.html')
+			try:
+				username = form.cleaned_data['signup_username']
+				password = form.cleaned_data['signup_password']
+				mobile = form.cleaned_data['mobile']
+				email = form.cleaned_data['email']
+				user = User.objects.create_user(username, email, password)
+				user.userdetails.mobile = mobile
+				user.save()
+				return render(request, 'html/account.html')
+			except Exception as e:
+				return render(request, 'html/account.html', {'serverError': 'username already in use')
 	else:
 		form = SignupForm()
 	return render(request, 'html/account.html', {'form': form})

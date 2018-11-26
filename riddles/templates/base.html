@@ -73,7 +73,7 @@
                 <form method="POST" action="/answers/{% block levelno %}{% endblock %}/" accept-charset="UTF-8">
                     {% csrf_token %}
                         <div class="input-field col s8 m3 offset-m4">
-                            <input id="answer" name="answer" type="text" class="validate">
+                            <input id="answer" name="answer" type="text" class="validate" pattern="[a-zA-Z0-9]+" >
                             <label class="left" for="answer" data-error="invalid">Answer</label>
                         </div>
                         <div class="input-field col s4 m1">

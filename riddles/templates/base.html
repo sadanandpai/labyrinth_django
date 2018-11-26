@@ -74,7 +74,7 @@
                     {% csrf_token %}
                         <div class="input-field col s8 m3 offset-m4">
                             <input id="answer" name="answer" type="text" class="validate" pattern="[a-zA-Z0-9]+" >
-                            <label class="left" for="answer" data-error="invalid">Answer</label>
+                            <label class="left" for="answer" data-error="Alpha numerics only">Answer</label>
                         </div>
                         <div class="input-field col s4 m1">
                             <input type="submit" class="waves-effect waves-light btn blue" value="Enter">
